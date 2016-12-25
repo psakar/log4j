@@ -28,7 +28,7 @@ import java.io.File;
 
    @author Ceki G&uuml;lc&uuml;
    @since version 0.9.1 */
-public abstract class FileWatchdog extends Thread {
+public abstract class FileWatchdog extends Thread implements ShutdownEventListener {
 
   /**
      The default delay between every file modification check, set to 60
@@ -104,8 +104,14 @@ public abstract class FileWatchdog extends Thread {
 	    Thread.sleep(delay);
       } catch(InterruptedException e) {
 	// no interruption expected
+        interrupted = true;
+        break;
       }
       checkAndConfigure();
     }
+  }
+
+  public void shutdown() {
+    this.interrupt();
   }
 }

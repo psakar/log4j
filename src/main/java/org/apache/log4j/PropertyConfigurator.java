@@ -473,6 +473,7 @@ new PropertyConfigurator().doConfigure(inputStream,
     PropertyWatchdog pdog = new PropertyWatchdog(configFilename);
     pdog.setDelay(delay);
     pdog.start();
+    LogManager.getLoggerRepository().addShutdownEventListener(pdog);
   }
 
 

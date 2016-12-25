@@ -736,6 +736,7 @@ public class DOMConfigurator implements Configurator {
     XMLWatchdog xdog = new XMLWatchdog(configFilename);
     xdog.setDelay(delay);
     xdog.start();
+    LogManager.getLoggerRepository().addShutdownEventListener(xdog);
   }
   
   private interface ParseAction {
